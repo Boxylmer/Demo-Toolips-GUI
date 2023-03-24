@@ -1,4 +1,4 @@
-using Pkg; Pkg.activate(".")
+using Pkg
 using Toolips, ToolipsDefaults
 using Revise
 using TestApp

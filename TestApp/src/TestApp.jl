@@ -16,6 +16,20 @@ module TestApp
         chk["checked"] = false
         # @show chk.fieldnames()
         push!(maindiv, chk)
+
+        # rngsld = ToolipsDefaults.rangeslider("rngsld", 1:100)
+        # push!(maindiv, rngsld)
+
+        # :text and :children
+        opt1 = ToolipsDefaults.option("1", text="Fasfsadf")  # should display values? maybe?
+        opt2 = ToolipsDefaults.option("2")
+        opt2[:text] = "you can also set it this way!"
+        drp = ToolipsDefaults.dropdown("drop", [opt1, opt2])
+        push!(maindiv, drp)
+
+        prg = ToolipsDefaults.progress("prg")
+        push!(maindiv, prg)
+
         write!(c, maindiv)
     end
 
