@@ -1,0 +1,9 @@
+name = "TestApp"
+uuid = "a446644f-9c47-4c5e-ab38-8ee36dbf23de"
+authors = ["Will <sypheren@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+Toolips = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"
+ToolipsDefaults = "1710be6b-e895-498d-ba35-e3ff0dac7995"
