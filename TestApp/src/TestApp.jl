@@ -9,9 +9,12 @@ module TestApp
         change this, view the start method below.
     """
     function home(c::Connection)
-
-        write!(c, h("helloworld", text = "hello world!", align = "center")) # align works!!
+        bod = body("mybody")
+        
         maindiv = div("maindiv")
+        push!(bod, maindiv)
+
+        push!(maindiv, h("helloworld", text = "hello world!", align = "center")) # align works!!
         chk = ToolipsDefaults.checkbox("check1", value=false)
         chk["checked"] = false
         # @show chk.fieldnames()
@@ -21,14 +24,22 @@ module TestApp
         # push!(maindiv, rngsld)
 
         # :text and :children
+        drp_div = div("drp_div")
+        push!(maindiv, drp_div)
+        style!(drp_div, "border-style" => "solid", "border-width" => 5px, "border-radius" => 5px, "padding" => 5px, "margin" => 10px, "border-color" => "white")
         opt1 = ToolipsDefaults.option("1", text="Fasfsadf")  # should display values? maybe?
         opt2 = ToolipsDefaults.option("2")
         opt2[:text] = "you can also set it this way!"
         drp = ToolipsDefaults.dropdown("drop", [opt1, opt2])
-        push!(maindiv, drp)
+        style!(drp, "border-style" => "solid", "border-width" => 5px, "border-radius" => 5px, "padding" => 5px, "margin" => 10px, "border-color" => "white")
+        push!(drp_div, drp)
 
+        style!(bod, "background-color" => "#222222", "border-style" => "solid", "border-width" => 5px, "border-radius" => 5px, "padding" => 5px, "margin" => 10px, "border-color" => "white")
+        
+        
+        write!(c, bod)
 
-        write!(c, maindiv)
+        # write!(c, maindiv)
     end
 
     fourofour = route("404") do c
