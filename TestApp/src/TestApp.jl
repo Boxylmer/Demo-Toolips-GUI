@@ -10,7 +10,7 @@ module TestApp
     """
     function home(c::Connection)
 
-        write!(c, p("helloworld", text = "hello world!"))
+        write!(c, h("helloworld", text = "hello world!", align = "center")) # align works!!
         maindiv = div("maindiv")
         chk = ToolipsDefaults.checkbox("check1", value=false)
         chk["checked"] = false
@@ -27,8 +27,6 @@ module TestApp
         drp = ToolipsDefaults.dropdown("drop", [opt1, opt2])
         push!(maindiv, drp)
 
-        prg = ToolipsDefaults.progress("prg")
-        push!(maindiv, prg)
 
         write!(c, maindiv)
     end
