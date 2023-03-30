@@ -1,5 +1,5 @@
 module TestApp
-    using Toolips, ToolipsDefaults
+    using Toolips, ToolipsDefaults, ToolipsSession
 
     # welcome to your new toolips project!
     """
@@ -49,7 +49,7 @@ module TestApp
     end
 
     routes = [route("/", home), fourofour]
-    extensions = Vector{ServerExtension}([Logger(), ])
+    extensions = Vector{ServerExtension}([Logger(), Session()])
     """
     start(IP::String, PORT::Integer, ) -> ::ToolipsServer
     --------------------
