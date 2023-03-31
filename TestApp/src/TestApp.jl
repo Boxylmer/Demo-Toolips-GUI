@@ -1,6 +1,27 @@
 module TestApp
     using Toolips, ToolipsDefaults, ToolipsSession
 
+    mutable struct Model
+        v::Int64
+    end
+
+    function update(m::Model)
+        m.v+=1
+    end
+    mod = Model(1)
+
+    function startmodel(m::Model)
+        Threads.@spawn begin
+            while true
+                update(m)
+                sleep(1)
+            end
+        end
+    end
+
+
+
+
     # welcome to your new toolips project!
     """
     home(c::Connection) -> _
@@ -9,14 +30,14 @@ module TestApp
         change this, view the start method below.
     """
     function home(c::Connection)
-        mainstyle = ("border-style" => "solid", "border-width" => 5px, "border-radius" => 5px, "padding" => 5px, "margin" => 10px, "border-color" => "white")
+        mainstyle = ("border-style" => "solid", "border-width" => 8px, "border-radius" => 8px, "padding" => 8px, "margin" => 8px, "border-color" => "white")
 
         bod = body("mybody")
         
         maindiv = div("maindiv")
         push!(bod, maindiv)
 
-        push!(maindiv, h("helloworld", text = "hello world!", align = "center")) # align works!!
+        push!(maindiv, h("helloworld", text = "hello world!" * string(mod.v), align = "center")) # align works!!
         chk = ToolipsDefaults.checkbox("check1", value=false)
         chk["checked"] = false
         # @show chk.fieldnames()
@@ -36,7 +57,7 @@ module TestApp
         style!(drp, mainstyle...)
         push!(drp_div, drp)
 
-        style!(bod, mainstyle..., "background-color" => "#555555", )
+        style!(bod, mainstyle..., "background-color" => "#5577ff", )
         
         
         write!(c, bod)
@@ -58,6 +79,7 @@ module TestApp
     function start(IP::String = "127.0.0.1", PORT::Integer = 8000)
         ws = WebServer(IP, PORT, routes = routes, extensions = extensions)
         ws.start(); ws
+        startmodel(mod)
     end
 end # - module
         
